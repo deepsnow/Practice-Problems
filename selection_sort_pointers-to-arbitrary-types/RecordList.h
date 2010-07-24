@@ -27,13 +27,11 @@ public:
 
 	void printList()
 	{
+		for(int i=0; i<size; i++)
 		{
-			for(int i=0; i<size; i++)
-			{
-				cout << *pRefList[i] << (i==size-1 ? "" : ", ");
-			}
-			cout << endl;
+			cout << *pRefList[i] << (i==size-1 ? "" : ", ");
 		}
+		cout << endl;
 	}
 
 	void sortList()
