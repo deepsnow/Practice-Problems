@@ -3,6 +3,7 @@
 
 #include "stdafx.h"
 #include "RecordList.h"
+#include "StringRecord.h"
 #include <iostream>
 using namespace std;
 
@@ -16,7 +17,14 @@ int _tmain(int argc, _TCHAR* argv[])
 	int intListE[3] = { 3, 1, 2 };
 	int intListF[3] = { 3, 2, 1 };
 	double doubleListG[7] = { 3.6, 9.5, 0.4, 6.8, 2.3, 4.1, 6.7 };
+	StringRecord strRecList[5];
+	strRecList[0].Init("tom", 4);
+	strRecList[1].Init("dick", 5);
+	strRecList[2].Init("harry", 6);
+	strRecList[3].Init("stan", 5);
+	strRecList[4].Init("harryl", 7);
 
+	cout << endl;
 	RecordList<int> recListA(intListA, 3);
 	recListA.printList();
 	recListA.sortList();
@@ -58,6 +66,11 @@ int _tmain(int argc, _TCHAR* argv[])
 	recListG.sortList();
 	recListG.printList();
 	cout << endl;
+
+	RecordList<StringRecord> recListH(strRecList, 5);
+	recListH.printList();
+	recListH.sortList();
+	recListH.printList();
 
 	return 0;
 }

@@ -23,7 +23,10 @@ public:
 		}
 	}
 
-	~RecordList(void) {delete [] pRefList;}
+	~RecordList(void)
+	{
+		delete [] pRefList;
+	}
 
 	void printList()
 	{
