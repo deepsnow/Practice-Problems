@@ -61,23 +61,26 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	//second solution
 	int inTrial2[] = { 8, 0, 1, 4, 0, 4, 4, 3, 0, 3 };
+	int length = sizeof(inTrial2) / sizeof(int);
 	cout << "input buffer:\t\t\t";
-	PrintBuffer(inTrial2, 10);
-	MerrickSort2(inTrial2, 10);
+	PrintBuffer(inTrial2, length);
+	MerrickSort2(inTrial2, length);
 	cout << "output buffer after sorting:\t";
-	PrintBuffer(inTrial2, 10);
+	PrintBuffer(inTrial2, length);
 	int inTrial3[] = { 6, 5, 0, 8, 6, 2, 8, 0, 0, 0 };
+	length = sizeof(inTrial3) / sizeof(int);
 	cout << "input buffer:\t\t\t";
-	PrintBuffer(inTrial3, 10);
-	MerrickSort2(inTrial3, 10);
+	PrintBuffer(inTrial3, length);
+	MerrickSort2(inTrial3, length);
 	cout << "output buffer after sorting:\t";
-	PrintBuffer(inTrial3, 10);
+	PrintBuffer(inTrial3, length);
 	int inTrial4[] = { 0, 0, 0, 5, 5, 5, 5, 5, 5, 5 };
+	length = sizeof(inTrial4) / sizeof(int);
 	cout << "input buffer:\t\t\t";
-	PrintBuffer(inTrial4, 10);
-	MerrickSort2(inTrial4, 10);
+	PrintBuffer(inTrial4, length);
+	MerrickSort2(inTrial4, length);
 	cout << "output buffer after sorting:\t";
-	PrintBuffer(inTrial4, 10);
+	PrintBuffer(inTrial4, length);
 
 	return 0;
 }
