@@ -126,6 +126,7 @@ void PassObjByRefConst(const MyClass &myArg)
 		//but if you make it a const method, you get error C2166 (presumably) because it attempts to modify a member variable
 	myArg.PrintAll();
 	cout << "POBRC() casts away const..." << endl;
+	//const_cast<MyClass>(myArg).SetThirdInt(); //compile error C2440: 'const_cast' : cannot conver from 'const MyClass' to 'MyClass'
 	MyClass * vulnerableArg = const_cast<MyClass*>(&myArg);
 	//vulnerableArg->PrintThirdInt();
 	vulnerableArg->SetThirdInt();
