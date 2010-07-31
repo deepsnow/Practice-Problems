@@ -104,7 +104,7 @@ void PassObjByValueConst(const MyClass myArg)
 	cout << "POBVC()..." << endl;
 	//next call fails with C2662 unless it become const
 	myArg.PrintAll();
-	//myArg.SetThirdInt();
+	//myArg.SetThirdInt(); //can't modify const - C2662
 	cout << "POBVC() casts away const..." << endl;
 	MyClass * vulnerableArg = const_cast<MyClass*>(&myArg);
 	//vulnerableArg->PrintThirdInt();
@@ -125,6 +125,11 @@ void PassObjByRefConst(const MyClass &myArg)
 	//myArg.SetThirdInt(); //compile error C2662 unless method is const
 		//but if you make it a const method, you get error C2166 (presumably) because it attempts to modify a member variable
 	myArg.PrintAll();
+	cout << "POBRC() casts away const..." << endl;
+	MyClass * vulnerableArg = const_cast<MyClass*>(&myArg);
+	//vulnerableArg->PrintThirdInt();
+	vulnerableArg->SetThirdInt();
+	vulnerableArg->PrintAll();
 }
 
 void PassObjByNcPtrNonConst(MyClass *myArg)
@@ -157,8 +162,18 @@ void PassObjByCPtrConst(const MyClass * const myArg)
 	//myArg->SetThirdInt(); //compile error C2662 unless method is const
 		//but if you make it a const method, you get error C2166 (presumably) because it attempts to modify a member variable
 	myArg->PrintAll();
-	//MyClass tempObj;
+	cout << "POBNCPC() casts away const..." << endl;
+	MyClass * vulnerableArg = const_cast<MyClass*>(myArg);
+	//vulnerableArg->PrintThirdInt();
+	vulnerableArg->SetThirdInt();
+	vulnerableArg->PrintAll();
+	cout << "POBNCPC() pointer report..." << endl;
+	MyClass tempObj;
 	//myArg = &tempObj; //compile error C3892
+	cout << "myArg: " << myArg << endl;
+	cout << "vulnerableArg: " << vulnerableArg << endl;
+	vulnerableArg = &tempObj;
+	cout << "vulnerableArg modified: " << vulnerableArg << endl;
 }
 
 int _tmain(int argc, _TCHAR* argv[])
@@ -224,6 +239,9 @@ int _tmain(int argc, _TCHAR* argv[])
 	PassObjByRefConst(myObj);
 	cout << "main() exercises MyClass..." << endl;
 	myObj.PrintAll();
+	cout << "main() reset" << endl;
+	myObj.ResetThirdInt();
+	myObj.PrintAll();
 	PassObjByNcPtrNonConst(&myObj);
 	cout << "main() exercises MyClass..." << endl;
 	myObj.PrintAll();
@@ -240,6 +258,11 @@ int _tmain(int argc, _TCHAR* argv[])
 	myObj.ResetThirdInt();
 	myObj.PrintAll();
 	PassObjByCPtrConst(&myObj);
+	cout << "main() exercises MyClass..." << endl;
+	myObj.PrintAll();
+	cout << "main() reset" << endl;
+	myObj.ResetThirdInt();
+	myObj.PrintAll();
 
 	return 0;
 }
