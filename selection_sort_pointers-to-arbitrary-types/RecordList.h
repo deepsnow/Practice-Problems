@@ -1,5 +1,7 @@
 #pragma once
 
+#include <iostream>
+
 template<typename T>
 class RecordList
 {
@@ -39,11 +41,15 @@ public:
 
 	void sortList()
 	{
+		//std::cout << "\tsize: " << size << endl;
+		int num_compares = 0;
+		int num_swaps = 0;
 		for(int i=0; i<size; i++)
 		{
 			int index_to_smallest = i;
 			for(int j=i+1; j<size; j++)
 			{
+				num_compares++;
 				if(*pRefList[j] < *pRefList[index_to_smallest])
 				{
 					index_to_smallest = j;
@@ -51,12 +57,15 @@ public:
 			}
 			if(*pRefList[index_to_smallest] < *pRefList[i])
 			{
+				num_swaps++;
 				//swap pointers
 				T* pTemp = pRefList[i];
 				pRefList[i] = pRefList[index_to_smallest];
 				pRefList[index_to_smallest] = pTemp;
 			}
 		}
+		//std::cout << "\tcompares: " << num_compares << endl;
+		//std::cout << "\tswaps: " << num_swaps << endl;
 	}
 
 };
