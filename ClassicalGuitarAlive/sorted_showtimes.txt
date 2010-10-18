@@ -227,7 +227,6 @@
 (6, '12', 'KCHO 90.7 FM Yreka, CA Saturdays @ Noon')
 (6, '12', 'WMHT 89.1FM Schenectady, New York Saturdays @ 12 noon')
 (6, '12', 'WRHV 88.7 FM Poughkeepsie, NY Saturdays @ 12 noon')
-(6, 12, 'Utah simulcasts via RealAudio at: Saturdays 600pm Mountain Time')
 (6, 13, 'WXEL 90.7FM West Palm Beach, FL Saturdays @ 1:00pm')
 (6, 14, 'KENW 89.5 FM Portales, New Mexico Saturdays @ 2:00pm')
 (6, 14, 'KENW 93.5 FM Clayton, NM Saturdays @ 2:00pm')
@@ -244,3 +243,4 @@
 (6, 14, 'KENW 92.1 FM Wagon Mound, NM Saturdays @ 2:00pm')
 (6, 16, 'KOCV 91.3 FM Odessa, TX Saturdays @ 4:00pm')
 (6, 18, 'KBYU 89.1 FM Provo, UT Saturdays @ 6:00pm')
+(6, 18, 'Utah simulcasts via RealAudio at: Saturdays 600pm Mountain Time')

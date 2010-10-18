@@ -4,7 +4,7 @@ class CgaSort:
 
     def __init__(self):
         """initialize important data structures"""
-        self.regx_hour_num = re.compile('(?P<hour>\d{1,2}(:\d\d)?[a|p]m)')
+        self.regx_hour_num = re.compile('(?P<hour>\d{1,2}:?(\d\d)?[a|p]m)')
         self.regx_hour_colloq = re.compile('(?P<colloq>noon|midnight)')
         self.regx_early_late = re.compile('pm$')
         self.regx_station = re.compile('[a-z]{3,4} ')
@@ -51,6 +51,7 @@ class CgaSort:
             time = int(token)
             if late and time != 12:
                 time += 12
+        #print('token: ' + token + ', time: ' + str(time))
         return time
                 
     def ProcessDateTime(self, token, line, previous_line):
