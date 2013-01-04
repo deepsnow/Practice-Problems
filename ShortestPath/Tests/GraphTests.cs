@@ -8,6 +8,13 @@ namespace Tests
     [TestFixture]
     public class GraphTests
     {
+        private Node Origin { get; set; }
+        private Node NodeA { get; set; }
+        private Node NodeB { get; set; }
+        private Node NodeC { get; set; }
+        private Node NodeD { get; set; }
+        private Graph SampleGraph { get; set; }
+
         [Test]
         public void TestDistanceCalc()
         {
@@ -25,43 +32,44 @@ namespace Tests
             // Therefore, the difference between the computed value and the expected value must be less than 1 * (10 ^ (-10)).
         }
 
+        [SetUp]
+        private void Init()
+        {
+            Origin = new Node(0, 0);
+            NodeA = new Node(-10, 5);      // sqrt(125)
+            NodeB = new Node(-8, 7);       // sqrt(113)
+            NodeC = new Node(1, 11);       // sqrt(122)
+            NodeD = new Node(12, 9);       // sqrt(225)
+            SampleGraph = new Graph(Origin, NodeA, NodeB, NodeC, NodeD); 
+        }
+
         [Test]
         public void TestMostProximatePoint()
         {
-            Node origin = new Node(0, 0);
-            Node A = new Node(-10, 5);      // sqrt(125)
-            Node B = new Node(-8, 7);       // sqrt(113)
-            Node C = new Node(1, 11);       // sqrt(122)
-            Node D = new Node(12, 9);       // sqrt(225)
-
-            Graph graph = new Graph(origin, A, B, C, D);
-
-            Assert.True(graph.GetMostProximate() == B);
+            Assert.True(SampleGraph.GetMostProximate().Equals(NodeB));
         }
 
         [Test]
         public void TestComputeShortestPath()
         {
-            Node origin = new Node(0, 0); // should make this a fixture setup
-            Node A = new Node(-10, 5);
-            Node B = new Node(-8, 7);
-            Node C = new Node(1, 11);
-            Node D = new Node(12, 9);
+            SampleGraph.ComputeShortestPath();
 
-            Graph graph = new Graph(origin, A, B, C, D);
+            Assert.True(SampleGraph.ShortestPath.Count == 4);
 
-            graph.ComputeShortestPath();
-
-            Assert.True(graph.ShortestPath.Count == 4);
-
-            Assert.AreEqual(B, graph.ShortestPath[0]);
-            Assert.AreEqual(A, graph.ShortestPath[1]);
-            Assert.AreEqual(C, graph.ShortestPath[2]);
-            Assert.AreEqual(D, graph.ShortestPath[3]);
+            Assert.AreEqual(NodeB, SampleGraph.ShortestPath[0]);
+            Assert.AreEqual(NodeA, SampleGraph.ShortestPath[1]);
+            Assert.AreEqual(NodeC, SampleGraph.ShortestPath[2]);
+            Assert.AreEqual(NodeD, SampleGraph.ShortestPath[3]);
 
             Console.WriteLine("Results from Djikstra's Algorithm:");
-            Console.WriteLine("Num times computed most proximate Node: {0}", graph.GetMostProximateCallCount);
-            Console.WriteLine("Num arc lengths computed and sorted across the above calculations: {0}", graph.NumArcLengthsComputedAndSorted);
+            Console.WriteLine("Num times computed most proximate Node: {0}", SampleGraph.GetMostProximateCallCount);
+            Console.WriteLine("Num arc lengths computed and sorted across the above calculations: {0}", SampleGraph.NumArcLengthsComputedAndSorted);
+        }
+
+        [Test]
+        public void TestComputeShortestPathBruteForce()
+        {
+
         }
     }
 }
