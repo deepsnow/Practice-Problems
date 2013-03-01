@@ -66,10 +66,41 @@ namespace Tests
             Console.WriteLine("Num arc lengths computed and sorted across the above calculations: {0}", SampleGraph.NumArcLengthsComputedAndSorted);
         }
 
-        [Test]
-        public void TestComputeShortestPathBruteForce()
-        {
+        //[Test]
+        //public void TestComputeShortestPathBruteForce()
+        //{
+        //    SampleGraph.ComputeShortestPathBruteForce();
 
+        //    Assert.True(SampleGraph.ShortestPath.Count == 4);
+
+        //    Assert.AreEqual(NodeB, SampleGraph.ShortestPath[0]);
+        //    Assert.AreEqual(NodeA, SampleGraph.ShortestPath[1]);
+        //    Assert.AreEqual(NodeC, SampleGraph.ShortestPath[2]);
+        //    Assert.AreEqual(NodeD, SampleGraph.ShortestPath[3]);
+
+        //    Console.WriteLine("Results from brute force approach:");
+        //    Console.WriteLine("Num times computed most proximate Node: {0}", SampleGraph.GetMostProximateCallCount);
+        //    Console.WriteLine("Num arc lengths computed and sorted across the above calculations: {0}", SampleGraph.NumArcLengthsComputedAndSorted);
+        //}
+
+        [Test]
+        public void TestComputePermutations()
+        {
+            List<List<Node>> resultLists = SampleGraph.ComputeAllPaths();
+            Assert.True(resultLists.Count == 24);
+
+            SampleGraph.ComputeShortestPathBruteForce();
+
+            Assert.True(SampleGraph.ShortestPath.Count == 4);
+
+            Assert.AreEqual(NodeB, SampleGraph.ShortestPath[0]);
+            Assert.AreEqual(NodeA, SampleGraph.ShortestPath[1]);
+            Assert.AreEqual(NodeC, SampleGraph.ShortestPath[2]);
+            Assert.AreEqual(NodeD, SampleGraph.ShortestPath[3]);
+
+            Console.WriteLine("Results from brute force algorithm:");
+            Console.WriteLine("Num pathways computed: {0}", resultLists.Count);
+            Console.WriteLine("Num arc lengths computed and sorted across the above calculations: {0}", SampleGraph.NumArcLengthsComputedAndSorted);
         }
     }
 }
