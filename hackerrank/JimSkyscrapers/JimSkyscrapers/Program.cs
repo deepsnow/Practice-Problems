@@ -10,22 +10,37 @@ namespace JimSkyscrapers
             var ri = new ReadInput();
             long numScrapers = ri.ReadNumScrapers();
             List<long> heights = ri.ReadScraperHeights();
-            List<Tuple<int, int>> paths = new List<Tuple<int, int>>();
+            Dictionary<long, long> currNeighbors = new Dictionary<long, long>();
+            long validPathsCount = 0;
+            long currMaxH = 0;
 
             for (int i=0; i<numScrapers; i++)
             {
                 long currH = heights[i];
-
-                for (int j=(i+1); j<numScrapers; j++)
+                if (currNeighbors.ContainsKey(currH))
                 {
-                    if (heights[j] > currH)
-                        break;
-                    if (heights[j] == currH)
-                        paths.Add(new Tuple<int, int>(i+1, j+1));
+                    currNeighbors[currH] += 1;
+                    validPathsCount += (2 * currNeighbors[currH]);
+                }
+                else
+                {
+                    currNeighbors.Add(currH, 0);
+                }
+
+                List<long> toRemove = new List<long>();
+                var keys = currNeighbors.Keys;
+                foreach (var key in keys)
+                {
+                    if (key < currH)
+                        toRemove.Add(key);
+                }
+                foreach (var key in toRemove)
+                {
+                    currNeighbors.Remove(key);
                 }
             }
 
-            Console.WriteLine(paths.Count * 2);
+            Console.WriteLine(validPathsCount);
         }
     }
 
