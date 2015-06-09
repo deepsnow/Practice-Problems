@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace JimSkyscrapers
 {
@@ -12,9 +13,8 @@ namespace JimSkyscrapers
             List<long> heights = ri.ReadScraperHeights();
             Dictionary<long, long> currNeighbors = new Dictionary<long, long>();
             long validPathsCount = 0;
-            long currMaxH = 0;
 
-            for (int i=0; i<numScrapers; i++)
+            for (int i = 0; i < numScrapers; i++)
             {
                 long currH = heights[i];
                 if (currNeighbors.ContainsKey(currH))
@@ -27,17 +27,8 @@ namespace JimSkyscrapers
                     currNeighbors.Add(currH, 0);
                 }
 
-                List<long> toRemove = new List<long>();
-                var keys = currNeighbors.Keys;
-                foreach (var key in keys)
-                {
-                    if (key < currH)
-                        toRemove.Add(key);
-                }
-                foreach (var key in toRemove)
-                {
-                    currNeighbors.Remove(key);
-                }
+                foreach (var currKey in currNeighbors.Where(x => x.Key < currH).ToList())
+                    currNeighbors.Remove(currKey.Key);
             }
 
             Console.WriteLine(validPathsCount);
