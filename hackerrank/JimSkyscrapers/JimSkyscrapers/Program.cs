@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace JimSkyscrapers
 {
@@ -11,28 +10,70 @@ namespace JimSkyscrapers
             var ri = new ReadInput();
             long numScrapers = ri.ReadNumScrapers();
             List<long> heights = ri.ReadScraperHeights();
-            Dictionary<long, long> currNeighbors = new Dictionary<long, long>();
             long validPathsCount = 0;
+            Skyscraper currScraper = null;
 
             for (int i = 0; i < numScrapers; i++)
             {
                 long currH = heights[i];
-                if (currNeighbors.ContainsKey(currH))
+
+                var newScraper = new Skyscraper() { count = 0, height = currH, prevBuilding = null };
+
+
+                if (currScraper == null)
                 {
-                    currNeighbors[currH] += 1;
-                    validPathsCount += (2 * currNeighbors[currH]);
+                    currScraper = newScraper;
                 }
                 else
                 {
-                    currNeighbors.Add(currH, 0);
+                    if (currH == currScraper.height)
+                    {
+                        currScraper.count++;
+                        validPathsCount += (2 * currScraper.count);
+                    }
+                    else if (currH < currScraper.height)
+                    {
+                        newScraper.prevBuilding = currScraper;
+                        currScraper = newScraper;
+                    }
+                    else // currH > newScraper.height
+                    {
+                        var iter = currScraper;
+                        while (iter != null)
+                        {
+                            if (currH == iter.height)
+                            {
+                                iter.count++;
+                                validPathsCount += (2 * iter.count);
+                                currScraper = iter;
+                                break;
+                            }
+                            else if (currH < iter.height)
+                            {
+                                newScraper.prevBuilding = iter;
+                                currScraper = newScraper;
+                                break;
+                            }
+                            else
+                            {
+                                if (iter.prevBuilding == null)
+                                    currScraper = newScraper;
+                            }
+                            iter = iter.prevBuilding;
+                        }
+                    }
                 }
-
-                foreach (var currKey in currNeighbors.Where(x => x.Key < currH).ToList())
-                    currNeighbors.Remove(currKey.Key);
             }
 
             Console.WriteLine(validPathsCount);
         }
+    }
+
+    class Skyscraper
+    {
+        public long height;
+        public long count;
+        public Skyscraper prevBuilding;
     }
 
     class ReadInput
