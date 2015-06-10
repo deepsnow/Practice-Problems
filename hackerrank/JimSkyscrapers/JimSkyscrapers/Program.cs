@@ -26,41 +26,28 @@ namespace JimSkyscrapers
                 }
                 else
                 {
-                    if (currH == currScraper.height)
+                    var iter = currScraper;
+                    while (iter != null)
                     {
-                        currScraper.count++;
-                        validPathsCount += (2 * currScraper.count);
-                    }
-                    else if (currH < currScraper.height)
-                    {
-                        newScraper.prevBuilding = currScraper;
-                        currScraper = newScraper;
-                    }
-                    else // currH > newScraper.height
-                    {
-                        var iter = currScraper;
-                        while (iter != null)
+                        if (currH == iter.height)
                         {
-                            if (currH == iter.height)
-                            {
-                                iter.count++;
-                                validPathsCount += (2 * iter.count);
-                                currScraper = iter;
-                                break;
-                            }
-                            else if (currH < iter.height)
-                            {
-                                newScraper.prevBuilding = iter;
-                                currScraper = newScraper;
-                                break;
-                            }
-                            else
-                            {
-                                if (iter.prevBuilding == null)
-                                    currScraper = newScraper;
-                            }
-                            iter = iter.prevBuilding;
+                            iter.count++;
+                            validPathsCount += (2 * iter.count);
+                            currScraper = iter;
+                            break;
                         }
+                        else if (currH < iter.height)
+                        {
+                            newScraper.prevBuilding = iter;
+                            currScraper = newScraper;
+                            break;
+                        }
+                        else
+                        {
+                            if (iter.prevBuilding == null)
+                                currScraper = newScraper;
+                        }
+                        iter = iter.prevBuilding;
                     }
                 }
             }
