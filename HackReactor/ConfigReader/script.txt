@@ -1,0 +1,7 @@
+Unit testing revitalized my coding career, and I’m delighted to share some of that goodness.
+
+At first I found it difficult to write unit-testable code because my code was too tightly coupled to external dependencies. Here’s an example: a simple C# class for reading configuration settings from a text file. The code that opens the file and reads its contents is making two calls that interact with the file system, which is an external dependency. I could write an integration test to exercise this code against a file on a disk, but that makes for a slower and less portable test.
+
+Here’s a refactored version of the class that uses a dependency injection container to reduce coupling. This code fetches an implementation of the IStreamReader interface that was loaded previously by the caller. The production caller loads a genuine implementation that interacts with the file system. The test caller loads a mock implementation, one that simulates the external calls and records them to be verified by the unit test.
+
+Please take advantage of this technique and enjoy the immense benefits of continuously tested code.
