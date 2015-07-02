@@ -35,7 +35,7 @@ namespace ConfigReader
             }
             catch (Exception e)
             {
-                throw new Exception(string.Format("Error config file \'{0}\'. Error message: {1}", configFilePath, e.Message));
+                throw new Exception(string.Format("Error accessing config file \'{0}\'. Error message: {1}", configFilePath, e.Message));
             }
         }
     }
@@ -66,24 +66,6 @@ namespace ConfigReader
         }
     }
 
-    public class ConfigStreamReaderTestable : IStreamReader
-    {
-        public void Init(string filePath)
-        {
-            
-        }
-
-        public string ReadLine()
-        {
-            return "nothing important";
-        }
-
-        public void Dispose()
-        {
-            
-        }        
-    }
-
     [TestFixture]
     public class ConfigReader2Tests
     {
@@ -102,7 +84,7 @@ namespace ConfigReader
         {
             mockReader.Setup(x => x.Init(It.IsAny<string>()));
             mockReader.Setup(y => y.ReadLine());
-            mockReader.Setup(z => z.Dispose()); // confirms that Dispose() call is made implicity via the using statement - we don't want to leak
+            mockReader.Setup(z => z.Dispose()); // confirms that Dispose() call is made implicity via the using statement
 
             var cr = new ConfigReader2(phonyFilePath);
             cr.ReadConfigFile();
