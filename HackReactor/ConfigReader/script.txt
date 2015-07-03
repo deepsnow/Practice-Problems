@@ -1,6 +1,6 @@
-Unit testing revitalized my career, but I had to learn deal with tightly coupled dependencies.
+Hi, I'm Doug. Unit testing revitalized my love for code, but I had to learn to deal with tight coupling.
 
-Here’s an example, a class for reading configuration settings from a text file. The code that opens and reads the file is making calls to the file system, an external dependency. I could write an integration test to exercise this code against a file on a disk, but that makes for a slower and less portable test.
+Here’s an example, a class for reading configuration settings from a text file. The code that opens and reads the file makes calls to the file system, an external dependency. I could write an integration test to exercise this code against a file on a disk, but that makes for a slower and less portable test.
 
 The solution? Use a dependency injection container to reduce coupling. This code fetches an implementation of the stream reader that was loaded previously. The production caller loads a genuine reader that interacts with the file system. The test caller loads a mock reader, one that simulates external calls and records them to be verified by the unit test.
 
