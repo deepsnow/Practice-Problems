@@ -17,7 +17,7 @@ namespace ConfigReader
             settings = new Dictionary<string, string>();
             configFilePath = filePath;
         }
-
+         
         public void ReadConfigFile()
         {
             try
