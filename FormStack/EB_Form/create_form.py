@@ -20,13 +20,12 @@ class CreateForm:
         json_data = json.dumps(self.data)
         self.binary_data = bytes(json_data, "UTF-8")
         self.create_form_url = "https://www.formstack.com/api/v2/form.json"
-        self.header = bytes(urllib.parse.urlencode(
-            {
+        self.headers = {
                 "Content-Length" : str(len(json_data)),
                 "Content-Type" : " application/x-www-form-urlencoded;charset=utf-8",
                 "Authorization" : "Bearer 6F4D60849DE3A0E43758867E882D1AB6",
-            }), "UTF-8")
-        self.urlRequest = urllib.request.Request(self.create_form_url, self.header)
+            }
+        self.urlRequest = urllib.request.Request(self.create_form_url, None, self.headers)
 
     def Create(self):
         return urllib.request.urlopen(self.urlRequest, self.binary_data)
