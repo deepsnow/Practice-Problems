@@ -13,8 +13,8 @@ class CreateForm:
                 "db" : "0",
                 "num_columns" : "4",
                 "disabled_message" : "This form is currently inactive.",
-                "notifications" : [ "doug.axtell@gmail.com" ],
-                "confirmation" : [ "doug.axtell@gmail.com" ],
+                "notifications" : ( "doug.axtell@gmail.com" ),
+                "confirmation" : ( "doug.axtell@gmail.com" ),
             }
         json_data = json.dumps(self.data)
         self.binary_data = bytes(json_data, "UTF-8")
