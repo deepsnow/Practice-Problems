@@ -4,7 +4,6 @@ from unittest.mock import Mock
 import urllib.request
 import urllib.parse
 import json
-import io
 
 class CreateForm:
 
@@ -35,7 +34,6 @@ class CreateFormTest(unittest.TestCase):
 
     def setUp(self):
         self.cf = CreateForm()
-        
 
     def test_CreateForm_OneUrlReqMade(self):
         with patch.object(urllib.request, 'urlopen', return_value=None) as mock_method:
