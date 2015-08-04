@@ -22,8 +22,8 @@ class CreateForm:
         self.create_form_url = "https://www.formstack.com/api/v2/form.json"
         self.headers = {
                 "Content-Length" : str(len(json_data)),
-                "Content-Type" : " application/x-www-form-urlencoded;charset=utf-8",
-                "Authorization" : "Bearer 6F4D60849DE3A0E43758867E882D1AB6",
+                "Content-Type" : " application/json;charset=utf-8",
+                "Authorization" : "Bearer 1cf981d679f3ce2175fc3426253f8f0f",
             }
         self.urlRequest = urllib.request.Request(self.create_form_url, None, self.headers)
 
@@ -45,7 +45,10 @@ class CreateFormTest(unittest.TestCase):
 
 def main():
     cf = CreateForm()
-    print(json.loads(cf.Create()))
+    hr = cf.Create()
+    print(hr.status)
+    body = hr.read()
+    print(json.loads(str(body, "UTF-8")))
 
 if __name__ == '__main__':
     main()
